@@ -18,6 +18,7 @@ COPY . /home/race
 
 EXPOSE 19999
 
+USER 5000
 # Execute Program(s)
 CMD   "python" /home/race/server.py 
 
