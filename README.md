@@ -13,6 +13,7 @@ Step 4) Build docker application
      $docker build -t <docker_username>/<name_your_container> .
 
 Example: docker build -t saa114/race . 
+
 Note: DO NOT FORGET THE DOT(.) AT THE END
 
 Step 4) Run docker application 
