@@ -14,14 +14,18 @@ Step 4) Build docker application
 Example: docker build -t saa114/race . 
 Note: DO NOT FORGET THE DOT(.) AT THE END
 
-Sep 4) Run docker application 
+Step 4) Run docker application 
   
   #To run application in interactive mode
      
-     $docker run -it -p 4000:19999 saa114/race
+     $docker run -it --rm -p 4000:19999 saa114/race
 
   #To run application constantly on port.
 
-     $docker run -p 4000:19999 saa114/race
- 
+     $docker run --rm -p 4000:19999 saa114/race
+Step 5) To connect to the server
+
+     $curl localhost:4000
+
+      
 
