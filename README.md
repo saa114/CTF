@@ -14,7 +14,7 @@ Step 4) Build docker application
 
 Example: docker build -t saa114/race . 
 
-Note: DO NOT FORGET THE DOT(.) AT THE END
+NOTE: DO NOT FORGET THE DOT(.) AT THE END
 
 Step 4) Run docker application 
   
