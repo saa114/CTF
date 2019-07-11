@@ -1,5 +1,6 @@
+# CTF problem The Race setup
+
 Step 1) Copy files in local directory
-# In your local directory
 
      $git clone https://github.com/saa114/race.git
 
