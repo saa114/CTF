@@ -5,10 +5,7 @@ FROM ubuntu
 FROM python:2.7.11
 
 # Update
-#RUN apt-get -y  update
-
-
-#RUN  apt-get -y install linux-headers-amd64 build-essential libc-dev gcc
+#RUN apt-get -y  update 
 
 # Create a directory in docker container
 RUN mkdir -p /home/race
@@ -16,12 +13,17 @@ RUN mkdir -p /home/race
 # Copy continents from current directory to docker directory
 COPY . /home/race
 
+#Open port in docker(must be same port in server)
 EXPOSE 19999
 
-USER 5000
+#Adds user with non-root permission
+RUN useradd -s /bin/bash ctfuser
+
+#Allows user to execute cmd
+USER ctfuser
+
 # Execute Program(s)
-CMD   "python" /home/race/server.py 
+CMD   "python"  /home/race/server.py 
 
 
-# Note: "echo" is used when to output bash. 
-#       "python" us used to disregard flags.
+# Note: "python" us used to disregard flags.
