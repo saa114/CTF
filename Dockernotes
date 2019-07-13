@@ -1,0 +1,29 @@
+Docker notes:
+
+docker run -it saa114/race sh  #login docker terminal
+
+which python    #locate directory of python
+
+ls -l /usr/local/bin/python*  #find which python docker is linked to.
+
+mkdir original/directory  #creates a directory in original location
+
+ln -s /original/directory linked_directory #creates a symbolic link to the original location
+
+docker rmi -f $( docker images -q -f dangling=true)  #Deletes all <none> images
+
+docker run -it saa114/race #Run dokcer problem 'race'
+
+sudo lsof -i:19999     #find which processes is running through port
+
+dokcer ps #check container id
+
+docker inspect <container_id> #check ip address of docker container
+
+docker run -it -p 4000:19999 saa114/race  #docker runs the server where 4000 is the client port
+                                          #19999 is the server port.
+                                          #Remove -it to keep the server constanly running
+
+netstat -nltp  #check the ports running 
+
+
