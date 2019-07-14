@@ -8,7 +8,7 @@ Step 2) Make an account in docker
        
      https://www.docker.com/
 
-Step 3) Go to local directory where the github files.
+Step 3) Go to local directory where the github files are.
 
      $docker login
      
