@@ -10,13 +10,17 @@ Step 2) Make an account in docker
 
 Step 3) Go to local directory where the github files.
 
+     $docker login
+     
+  #Then type user name and password
+
 Step 4) Build docker container
 
      $docker build -t <docker_username>/<name_your_container> .
 
 Example: docker build -t saa114/race . 
 
-NOTE: DO NOT FORGET THE DOT(.) AT THE END
+NOTE: Do not forget the dot(.) at the end
 
 Step 4) Run docker application 
   
@@ -45,3 +49,7 @@ Step 6) To kill a process running constantly on port
   #Then kill the Process.
   
      $docker kill <container_id>
+     
+Step 7) To push your container to docker hub
+
+     $docker push saa114/race
