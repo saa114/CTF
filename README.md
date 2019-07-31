@@ -1,8 +1,8 @@
-# CTF problem The Race setup
+# CTF problem setup
 
 Step 1) Copy files in local directory
 
-     $git clone https://github.com/saa114/race.git
+     $git clone https://github.com/saa114/CTF.git
 
 Step 2) Make an account in docker 
        
