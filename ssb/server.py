@@ -10,8 +10,7 @@ class ClientHandler(SocketServer.BaseRequestHandler):
             data = self.request.recv(4096)
             data = data[:-1]
             tmpc = os.path.dirname(__file__)
-#            os.path.join(os.path.dirname(__file__))
-            tmpc = './overflow' 
+            tmpc = './home/ssb/overflow' 
             cmd = [tmpc] + [data]
             subprocess.Popen(cmd , stdin=fd, stdout=fd, stderr=fd).communicate()
 

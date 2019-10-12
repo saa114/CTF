@@ -1,5 +1,6 @@
-FROM ubuntu:latest
+FROM 32bit/ubuntu:16.04
 
+COPY source.list /etc/apt/source.list
 # update and install tools
 RUN apt update && apt -y upgrade
 RUN apt-get update && apt-get install  -y nginx
@@ -12,6 +13,7 @@ RUN apt-get update && apt-get install -y sudo
 # create directory
 RUN mkdir -p /home/ssb
 COPY . /home/ssb
+COPY flag.txt /
 
 RUN rm -rf /etc/nginx/sites-enabled
 RUN rm -rf /etc/nginx/sites-available
@@ -24,6 +26,7 @@ EXPOSE 13131
 EXPOSE 64000
 
 RUN useradd -s /bin/bash ctfuser
+
 
 #USER ctfuser
 
