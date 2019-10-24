@@ -1,0 +1,96 @@
+FROM ubuntu:16.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# update and install tools
+RUN apt update && apt -y upgrade
+#RUN apt-get update && apt-get install  -y nginx
+RUN apt-get update && apt-get install -y python python-pip
+RUN apt-get update && apt-get install -y net-tools
+RUN apt-get update && apt-get install -y procps
+RUN apt-get update && apt-get install -y sudo
+#RUN apt-get update && apt-get install -y  php-fpm php-mysql
+RUN apt-get update && apt-get install -y  php7.0-fpm php7.0-mysql
+RUN apt-get update && apt-get install  -y nginx
+
+
+RUN mkdir -p /home/php
+COPY . /home/php
+
+RUN rm -rf /etc/nginx/sites-enabled
+RUN rm -rf /etc/nginx/sites-available
+RUN rm -rf /etc/nginx/modules-available
+
+RUN groupadd site1
+RUN useradd -g site1 site1
+
+#RUN sed -i "s%listen = /var/run/php7.0-fpm.sock%listen = 0.0.0.0:10800%" /etc/php/7.0/fpm/pool.d/www.conf
+#RUN mkdir -p /etc/nginx/sites-enabled
+#RUN mkdir -p /etc/nginx/sites-available
+
+#COPY 10-opache.ini /etc/php/7.0/fpm/conf.d
+#RUN rm -f /etc/php/7.0/fpm/php.ini
+#COPY php.ini /etc/php/7.0/fpm
+
+RUN rm -f /etc/php/7.0/fpm/pool.d/www.conf
+COPY site1.conf /etc/php/7.0/fpm/pool.d
+
+#COPY site1 /etc/nginx/sites-available
+#RUN chown -R nobody:site1 /etc/nginx/sites-available/site1
+#RUN ln -s /etc/nginx/sites-available/site1 /etc/nginx/sites-enabled/site1
+#RUN chown -R nobody:site1 /etc/nginx/sites-enabled/site1
+#RUN rm -rf /etc/nginx 
+
+#RUN mkdir -p /etc/nginx
+
+#RUN mkdir -p /var/lib/nginx/body
+#RUN service nginx start
+
+#RUN echo "Congfiguring nginx and php-fpm"
+#RUN rm -rf /etc/nginx/sites-available /etc/nginx/sites-enabled
+#RUN mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled
+#RUN chmod 755 /etc/nginx/sites-available /etc/nginx/sites-enabled
+RUN rm -f /etc/php/7.0/fpm/php.ini 
+COPY php.ini /etc/php/7.0/fpm
+COPY 10-opcache.ini /etc/php/7.0/fpm/conf.d 
+
+# main site
+#RUN echo "Adding main site"
+#cp /vagrant/config/ctf.nginx /etc/nginx/sites-enabled/ctf
+#RUN rm -rf /srv/http
+#RUN mkdir -p /srv/http/ctf
+#RUN chmod 711 /srv/http /srv/http/ctf
+
+# add site1
+#RUN echo "Adding site1 PHPoverwrite 10800"
+#RUN groupadd site1
+#RUN useradd -g site1 site1
+#RUN rm -f /etc/php/7.0/fpm/pool.d/site1.conf
+#COPY site1.conf /etc/php/7.0/fpm/pool.d 
+#COPY site1 /etc/nginx/sites-available
+#RUN chown -R nobody:site1 /etc/nginx/sites-available/site1
+#RUN ln -s /etc/nginx/sites-available/site1 /etc/nginx/sites-enabled/site1
+#RUN chown -R nobody:site1 /etc/nginx/sites-enabled/site1
+#RUN mkdir /srv/http/site1
+#COPY . /srv/http/site1/
+#RUN chown -R nobody:site1 /srv/http/site1
+#RUN chmod 011 /home/php
+#RUN chmod 044 /home/php/*
+#RUN chmod 044 /home/php/data/*
+
+# copy my cofiguration to nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY data /etc/nginx/data
+COPY data/* /var/www/html/
+#RUN chmod 044 /home/php/*
+
+EXPOSE 10800
+#EXPOSE 65000
+
+RUN useradd -s /bin/bash ctfuser
+
+#USER ctfuser
+
+CMD  "/bin/bash" "/home/php/start.sh"
+
+

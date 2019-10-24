@@ -1,0 +1,148 @@
+user www-data;
+worker_processes 1;
+#daemon off;
+#error_log /tmp/error.log warn;
+# auto;
+#nginx -g 'daemon off;'
+#pid /tmp/nginx.pid;
+#include /etc/nginx/modules-enabled/*.conf;
+
+events {
+	worker_connections 1024; #768
+	# multi_accept on;
+}
+
+http {
+        
+
+    server {
+        
+        listen 10800;
+       # root /etc/nginx/data;
+       # index index.html source.php;
+    
+        location / {
+   #         try_files $uri $uri/ =404;
+            root /etc/nginx/data;
+             index index.php index.html; # source.php;
+           # try_files $uri $uri
+            error_page  405     =200 $uri; #makes you input in the search bar of"The Ducks"
+          #  autoindex on;
+          
+          #
+         #   proxy_pass http://localhost:10800;
+      #      proxy_method POST;
+       #     include fastcgi_params;
+       #     proxy_redirect  off;
+       #     proxy_http_version 1.1;
+       #     proxy_buffering off;
+       }
+
+
+
+         location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+#           location ~ \.php$ {
+#        try_files $uri =404;
+ #       fastcgi_split_path_info ^(.+\.php)(/.+)$;
+  #      fastcgi_pass unix:/var/run/php7.2-fpm-site1.sock;
+ 
+#       fastcgi_index index.php;
+   #     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    #    include fastcgi_params;
+ #   }
+
+#        location /images/ {
+ #           root /etc/nginx/data;
+  #          autoindex on;
+
+   #     }
+        
+    #    location /textfile/ {
+     #       root /etc/nginx/data;
+
+      #      autoindex on;
+       # }
+    }
+
+	##
+	# Basic Settings
+	##
+
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+	# server_tokens off;
+
+	# server_names_hash_bucket_size 64;
+	# server_name_in_redirect off;
+
+#	include /etc/nginx/mime.types;
+#	default_type application/octet-stream;
+
+	##
+	# SSL Settings
+	##
+
+#	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+#	ssl_prefer_server_ciphers on;
+
+	##
+	# Logging Settings
+	##
+
+#	access_log /var/log/nginx/access.log;
+#	error_log /tmp/error.log;
+
+
+	##
+	# Gzip Settings
+	##
+
+#	gzip on;
+       
+	# gzip_vary on;
+	# gzip_proxied any;
+	# gzip_comp_level 6;
+	# gzip_buffers 16 8k;
+	# gzip_http_version 1.1;
+	# gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+	##
+	# Virtual Host Configs
+	##
+        
+#	include /etc/nginx/conf.d/*.conf;
+#	include /etc/nginx/sites-enabled/*;
+}
+
+
+#mail {
+#	# See sample authentication script at:
+#	# http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+# 
+#	# auth_http localhost/auth.php;
+#	# pop3_capabilities "TOP" "USER";
+#	# imap_capabilities "IMAP4rev1" "UIDPLUS";
+# 
+#	server {
+#		listen     localhost:110;
+#		protocol   pop3;
+#		proxy      on;
+#	}
+# 
+#	server {
+#		listen     localhost:143;
+#		protocol   imap;
+#		proxy      on;
+#	}
+#}
