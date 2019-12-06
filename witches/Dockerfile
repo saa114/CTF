@@ -1,6 +1,9 @@
-FROM ubuntu
+FROM ubuntu:latest
 
-FROM python:2.7.11
+RUN apt update && apt -y upgrade \
+    && apt-get install -y python python-pip \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /home/witcher
 
