@@ -1,11 +1,11 @@
 FROM ubuntu:latest
 
 # update and install tools
-RUN apt update && apt -y upgrade
-RUN apt-get update && apt-get install -y python python-pip
-RUN apt-get update && apt-get install -y net-tools
-RUN apt-get update && apt-get install -y procps
-#RUN apt-get update && apt-get install -y gnome-terminal
+RUN apt update && apt -y upgrade \
+    && apt-get install  -y python python-pip \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
 
 # create directory
 RUN mkdir -p /home/hackerlevel
@@ -17,5 +17,6 @@ RUN useradd -s /bin/bash ctfuser
 
 USER ctfuser
 
-CMD "python" "/home/hackerlevel/server.py"
+CMD  "python" "/home/hackerlevel/flag_question.py" && "python" "/home/hackerlevel/server.py"
+
 
