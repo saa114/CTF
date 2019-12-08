@@ -1,17 +1,18 @@
-FROM 32bit/ubuntu:16.04
+FROM yukoff/alpine-32bit
 
 
-COPY source.list /etc/apt/source.list
+#COPY source.list /etc/apt/source.list
 
 # update and install tools
 
 #RUN apt update && apt -y upgrade
 
-RUN apt update && apt-get install  -y nginx \
-    python python-pip \
+RUN apk update && apk add --no-cache --upgrade --arch x86 nginx \
+    python2 \
+    libc6-compat \ 
     sudo \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+    bash \
+    && rm -rf /var/lib/cache/apk/*
 
 # create directory
 RUN mkdir -p /home/ssb
@@ -29,7 +30,7 @@ COPY data /etc/nginx/data
 EXPOSE 13131
 EXPOSE 64000
 
-RUN useradd -s /bin/bash ctfuser
+RUN addgroup -S ctfgroup && adduser -S ctfuser -G ctfgroup
 
 CMD "/bin/bash" "/home/ssb/start.sh"
 
