@@ -30,7 +30,5 @@ EXPOSE 55000
 
 RUN useradd -s /bin/bash ctfuser 
 
-#USER ctfuser
-
 CMD "/bin/bash" "/home/easy-rsa/start.sh"
 

@@ -30,7 +30,5 @@ EXPOSE 63000
 
 RUN useradd -s /bin/bash ctfuser 
 
-#USER ctfuser
-
 CMD "/bin/bash" "/home/messy-aes/start.sh"
 

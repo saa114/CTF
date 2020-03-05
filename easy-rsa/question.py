@@ -3,7 +3,7 @@ import os
 flagfile = open("/home/easy-rsa/flag.txt", "r")
 ctf_flag = flagfile.readline().strip()
 
-print "\nWe encrypted the flag with rsa. Can you crack it? The file is in localhost:55000/easy-rsa.tar.gz \n"
+print "\nWe encrypted the flag with rsa. Can you crack it? The file is in http://localhost:55000/easy-rsa.tar.gz \n"
 print "Hint: Short public key. \n"
 
 while True:
