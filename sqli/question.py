@@ -3,7 +3,7 @@ import os
 flagfile = open('/home/sqli/flag.txt','r')
 ctf_flag = flagfile.readline().strip()
 
-print "Can you log into the system? http://127.0.0.1:10811/ \n"
+print "\nCan you log into the system? http://127.0.0.1:10811/ \n"
 print "Hint:  There is a databse storing login information, maybe it can be injected.\n "
 
 while True:

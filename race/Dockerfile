@@ -1,5 +1,5 @@
 # Get latest ubuntu image
-FROM ubuntu
+FROM ubuntu:latest
 
 # Get python configurations
 RUN apt update && apt -y upgrade \
@@ -7,8 +7,6 @@ RUN apt update && apt -y upgrade \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-# Update
-#RUN apt-get -y  update 
 
 # Create a directory in docker container
 RUN mkdir -p /home/race
@@ -28,5 +26,3 @@ USER ctfuser
 # Execute Program(s)
 CMD   "python" /home/race/question.py && "python" /home/race/server.py 
 
-
-# Note: "python" us used to disregard flags.
